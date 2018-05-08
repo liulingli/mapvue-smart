@@ -11,9 +11,9 @@
            <div v-if="data.type == 1" class="tags-content">
              <tags text="附近乘客" color="#f8614a"></tags>
            </div>
-           <template v-if="data.type == 2">
+           <div v-if="data.type == 2" class="tags-content">
              <tags text="附近车主" color="#04ca0a"></tags>
-           </template>
+           </div>
          </div>
          <div class="list-card-footer">
            <div @click="$emit('listClick',data.phone)" class="button">联系他</div>
@@ -35,7 +35,6 @@
       tags
     },
     mounted () {
-      console.log('data', this.data.phone, this.data.startPoint)
     }
   }
 </script>

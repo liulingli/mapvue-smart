@@ -6,7 +6,7 @@
       <div class="tabs-menu">
         <div v-for="(menu, key) in menus" :key="key" class="tabs-menu-item" v-bind:class="curIndex==key?'selected':''" @click="changeIndex(key)"><span>{{menu}}</span></div>
       </div>
-      <swiper :current="curIndex" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :duration="duration" @change="change">
+      <swiper :current="curIndex" :indicator-dots="indicatorDots" autoplay="false" :interval="interval" :duration="duration" @change="change">
         <block>
           <swiper-item>
             <listCard v-for="(item, index) in dataSource1" :data="(item)" :key="index" v-on:listClick="listClick"></listCard>
