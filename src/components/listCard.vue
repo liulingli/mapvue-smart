@@ -27,8 +27,15 @@
 
   export default {
     props: ['data', 'listClick'],
+    data () {
+      return {
+      }
+    },
     components: {
       tags
+    },
+    mounted () {
+      console.log('data', this.data.phone, this.data.startPoint)
     }
   }
 </script>

@@ -1,3 +1,7 @@
+<template>
+  <div class="page-main"></div>
+</template>
+
 <script>
 export default {
   created () {
@@ -12,15 +16,18 @@ export default {
 </script>
 
 <style>
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-}
+  page{
+    width:100%;
+    height:100%;
+    box-sizing: border-box;
+    border-bottom:1px solid #f3f3f3;
+    overflow-y:hidden;
+  }
+  .page-main{
+    width:100%;
+    height:100%;
+    overflow-y:auto;
+  }
 
 *{
   box-sizing: border-box;

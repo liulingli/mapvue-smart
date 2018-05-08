@@ -22,7 +22,7 @@ export default {
       color: '#cccccc',
       backgroundColor: '#ffffff',
       selectedColor: '#f7614a',
-      borderStyle: '#f3f3f3',
+      borderStyle: 'white',
       list: [{
         pagePath: 'pages/index/main',
         text: '首页',
