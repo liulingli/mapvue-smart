@@ -6,7 +6,7 @@
       <div class="tabs-menu">
         <div v-for="(menu, key) in menus" :key="key" class="tabs-menu-item" v-bind:class="curIndex==key?'selected':''" @click="changeIndex(key)"><span>{{menu}}</span></div>
       </div>
-      <swiper :current="curIndex" :indicator-dots="indicatorDots" autoplay="false" :interval="interval" :duration="duration" @change="change">
+      <swiper :current="curIndex" :indicator-dots="indicatorDots" :autoplay="autoplay" :duration="duration" @change="change">
         <block>
           <swiper-item>
             <listCard v-for="(item, index) in dataSource1" :data="(item)" :key="index" v-on:listClick="listClick"></listCard>
@@ -30,8 +30,8 @@ export default {
       curIndex: 0,
       indicatorDots: false,
       autoplay: false,
-      interval: 5000,
-      duration: 1000,
+     // interval: 5000,
+      duration: 200,
       userInfo: {},
       dataSource1: [
         {type: 1, phone: '18883183248', startPoint: '草房地铁站11', endPoint: '首尔天成', boardingTime: '今天13：00', people: 3, remark: '希望走高速，有大件行李'},

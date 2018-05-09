@@ -12,30 +12,32 @@
         </div>
         <div class="form-item">
           <label class="form-label">身份选择</label>
-          <radio-group class="radio-group" bindchange="radioChange">
+          <radio-group class="radio-group" @change="radioChange">
             <label class="radio">
-              <radio value="1" checked=""/>我是乘客
+              <radio color="#00d101" value="1" checked="" /> <span class="text">我是乘客</span>
             </label>
             <label class="radio">
-              <radio value="2" checked=""/>我是司机
+              <radio color="#00d101" value="2"/><span class="text">我是司机</span>
             </label>
           </radio-group>
         </div>
         <div class="form-item">
           <label class="form-label">起点</label>
-          <input class="form-wrapper" placeholder="" />
+          <input class="form-wrapper" placeholder="请选择" />
         </div>
         <div class="form-item">
           <label class="form-label">终点</label>
-          <input class="form-wrapper" placeholder="" />
+          <input class="form-wrapper" placeholder="请选择" />
         </div>
         <div class="form-item">
           <label class="form-label">座位数</label>
-          <input class="form-wrapper" placeholder="" />
+          <picker :value='seatNum' mode="selector" :range="range" @change="change">
+            <view class="picker">{{range[seatNum]}}</view>
+          </picker>
         </div>
         <div class="form-item">
           <label class="form-label">出发时间</label>
-          <input class="form-wrapper" placeholder="" />
+           <detailPicker />
         </div>
         <div class="form-item">
           <label class="form-label">途径地</label>
@@ -43,54 +45,50 @@
         </div>
         <div class="form-item">
           <label class="form-label">价格</label>
-          <input class="form-wrapper" placeholder="" />
+          <input type="number" class="form-wrapper" placeholder="请输入" />
         </div>
         <div class="form-item">
           <label class="form-label">车辆信息</label>
-          <input class="form-wrapper" placeholder="" />
+          <input class="form-wrapper" placeholder="车牌号码，车身颜色" />
         </div>
         <div class="form-item">
           <label class="form-label">补充说明</label>
-          <input class="form-wrapper" placeholder="" />
+          <input class="form-wrapper" placeholder="价格面议，要求不抽烟" />
         </div>
         <button class="primary-btn">发布</button>
       </div>
     </div>
-    <map @markertap="markertap" :longitude="longitude" :latitude="latitude"></map>
   </div>
 </template>
 
 <script>
-  // Use Vuex
-  import store from './store'
+  import detailPicker from '@/components/detailPicker'
 
   export default {
     data () {
       return {
         latitude: 0,
-        longitude: 0
+        longitude: 0,
+        value: 0,
+        date: new Date(),
+        range: ['二座', '四座', '七座'],
+        seatNum: 0
       }
     },
+    components: {
+      detailPicker
+    },
     created () {
-      wx.getLocation({
-        type: 'wgs84',
-        success: (res) => {
-          let latitude = res.latitude  // 经度
-          let longitude = res.longitude // 纬度
-          console.log(res)
-          this.latitude = latitude
-          this.longitude = longitude
-        }
-      })
     },
     methods: {
-      increment () {
-        store.commit('increment')
+      radioChange (event) {
+        let value = event.mp.detail.value
+        this.value = value
       },
-      decrement () {
-        store.commit('decrement')
-      },
-      markertap () {
+      change (event) {
+        let value = event.mp.detail.value
+        this.seatNum = value
+        console.log(value)
       }
     }
   }
@@ -124,7 +122,7 @@
     flex: 1;
   }
 
-  .form-label, .form-wrapper, .radio-group label{
+  .form-label, .form-wrapper, .radio-group label, .picker{
     font-size:16px;
   }
 
@@ -135,6 +133,12 @@
     color:#ffffff;
     font-size:18px;
     border-radius:30px;
+  }
+  .radio radio:checked + .text{
+    color: #14bb0b
+  }
+  picker , .selector{
+    width:100%;
   }
 
 </style>
