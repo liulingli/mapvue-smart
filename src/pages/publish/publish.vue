@@ -23,11 +23,11 @@
         </div>
         <div class="form-item">
           <label class="form-label">起点</label>
-          <input class="form-wrapper" placeholder="请选择" />
+          <input class="form-wrapper" placeholder="请选择" :value="startAddress" @click="show('start')"/>
         </div>
         <div class="form-item">
           <label class="form-label">终点</label>
-          <input class="form-wrapper" placeholder="请选择" />
+          <input class="form-wrapper" placeholder="请选择":value="endAddress" @click="show('end')"/>
         </div>
         <div class="form-item">
           <label class="form-label">座位数</label>
@@ -58,11 +58,14 @@
         <button class="primary-btn">发布</button>
       </div>
     </div>
+    <mapChoose v-if="start" v-on:mapChange="mapChangeStart"/>
+    <mapChoose v-if="end" v-on:mapChange="mapChangeEnd"/>
   </div>
 </template>
 
 <script>
   import detailPicker from '@/components/detailPicker'
+  import mapChoose from '@/components/mapChoose'
 
   export default {
     data () {
@@ -72,11 +75,16 @@
         value: 0,
         date: new Date(),
         range: ['二座', '四座', '七座'],
-        seatNum: 0
+        seatNum: 0,
+        start: false,
+        end: false,
+        startAddress: '',
+        endAddress: ''
       }
     },
     components: {
-      detailPicker
+      detailPicker,
+      mapChoose
     },
     created () {
     },
@@ -89,6 +97,19 @@
         let value = event.mp.detail.value
         this.seatNum = value
         console.log(value)
+      },
+      show (type) {
+        this[type] = true
+      },
+      mapChangeStart (data) {
+        console.log(data)
+        this.startAddress = `${data.address}${data.title}`
+        this.start = false
+      },
+      mapChangeEnd (data) {
+        console.log(data)
+        this.endAddress = `${data.address}${data.title}`
+        this.end = false
       }
     }
   }
